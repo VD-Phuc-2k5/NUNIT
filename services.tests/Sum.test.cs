@@ -10,19 +10,19 @@ public class SumTests
     }
     
     [Test]
-    [Description("Tính tổng 2 số: 5+7=12 dùng areEqual. Passed")]
-    public void TC01()
+    [TestCase(5, 7, 12)]
+    [TestCase(-5, -7, -12)]
+    [TestCase(-5, 7, 2)]
+    [TestCase(0, 7, 7)]
+    [TestCase(0, 0, 0)]
+    [TestCase(unchecked(2147483647 + 1), 1, unchecked(2147483647 + 2))]
+    [TestCase(unchecked(-2147483648 - 1), 1, -2147483648)]
+    [TestCase(2147483647, 1, unchecked(2147483647 + 1))]
+    [TestCase(-2147483648, 1, unchecked(-2147483648 + 1))]
+    // 2147483647
+    public void TC01(int a, int b, int expected)
     {
-        int actualValue = Operations.Add(5, 7);
-        int expectedValue = 12;
-        Assert.That(actualValue, Is.EqualTo(expectedValue));
-    }
-    
-    [Test]
-    [Description("Tính tổng 2: 2+7=12 dùng areEqual. Failed")]
-    public void TC02() {
-        int actualValue = Operations.Add(2, 7);
-        int expectedValue = 9;
-        Assert.That(actualValue, Is.EqualTo(expectedValue));
+        int actualValue = Operations.Add(a, b);
+        Assert.That(actualValue, Is.EqualTo(expected));
     }
 }
